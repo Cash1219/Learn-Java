@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import service.AccountService;
@@ -17,12 +19,14 @@ import java.util.List;
 //如果spring版本是5.x，junit的版本需要4.12及其以上
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class Demo {
-    beanFactory factory = new beanFactory();
-    @Qualifier("ProxyService")
+//    beanFactory factory = new beanFactory();
+//    @Qualifier("ProxyService")
     @Autowired
-    private AccountService as = factory.getAccountService();
+//    private AccountService as = factory.getAccountService(); 先前的工厂代理控制事物
+    ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+    AccountService service = (AccountService) ac.getBean("accountServeice");
     @Test
     public void test() {
-        as.transfer("aaa","bbb",100f);
+        service.transfer("aaa","bbb",100f);
     }
 }

@@ -10,11 +10,11 @@ import java.util.List;
 
 public class AccountServeiceImpl implements AccountService {
     private AccountDao dao;
-    private TransactionManager ts;
-
-    public void setTs(TransactionManager ts) {
-        this.ts = ts;
-    }
+//    private TransactionManager ts;
+//
+//    public void setTs(TransactionManager ts) {
+//        this.ts = ts;
+//    }
 
     public void setDao(AccountDao dao) {
         this.dao = dao;
@@ -45,6 +45,7 @@ public class AccountServeiceImpl implements AccountService {
         Account sourceAccount = dao.findAccountByName(sourceName);
         Account targtAccount = dao.findAccountByName(targtName);
         sourceAccount.setMoney(sourceAccount.getMoney()-money);
+        int i = 1/0;
         targtAccount.setMoney(targtAccount.getMoney()+money);
         dao.updateAccount(sourceAccount);
         dao.updateAccount(targtAccount);
